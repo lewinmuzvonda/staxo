@@ -12,7 +12,9 @@ class AdminController extends Controller
 {
     public function index(){
 
-        $products = Product::get();
+        $products = Product::leftJoin('categories','categories.id','=','products.category')
+        ->select('products.name','products.image','products.price','products.status as product_status','categories.name as category_name')
+        ->get();
 
         return view('admin/products',[
             'products' => $products,

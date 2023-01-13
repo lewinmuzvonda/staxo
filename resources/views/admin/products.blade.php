@@ -18,6 +18,7 @@
                 <tr>
                     <th scope="col">Image</th>
                     <th scope="col">Product Name</th>
+                    <th scope="col">Product Category</th>
                     <th scope="col">Price</th>
                     <th scope="col">Status</th>
                     <th scope="col">Action</th>
@@ -30,6 +31,7 @@
                                 <img height="100px" width="100px" src="{{$product['image']}}" />
                             </td>
                             <td>{{$product['name']}}</td>
+                            <td>{{$product['category_name']}}</td>
                             <td>{{$product['price']}} AED</td>
                             <td>Active</td>
                             <td><button type="button" class="btn btn-primary">Edit Product</button></td>
