@@ -12,7 +12,7 @@ class ShopGridView extends GridView
      * Sets a model class to get the initial data
      */
     // protected $model = Product::class;
-    public $maxCols = 3;
+    public $maxCols = 4;
     public $withBackground = true;
     public $searchBy = ['name', 'price'];
 
@@ -23,7 +23,7 @@ class ShopGridView extends GridView
      */
     public function repository(): Builder
     {
-        return Product::select('products.name','products.image','products.price','products.status as product_status');
+        return Product::select('products.id','products.name','products.image','products.price','products.status as product_status');
     }
 
     public $cardComponent = 'customer.product';
@@ -35,6 +35,7 @@ class ShopGridView extends GridView
     public function card($model)
     {
         return [
+            'id' => $model->id,
             'image' => $model->image,
             'name' =>  $model->name,
             'price' =>  $model->price,

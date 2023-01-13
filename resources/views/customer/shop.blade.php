@@ -5,7 +5,7 @@
     @push('head')
         
     @endpush
-    <div align="center">
+    <div class="container-fluid p-5" align="center">
         @livewire('shop-grid-view')
     </div>
 
