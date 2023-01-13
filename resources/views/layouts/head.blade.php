@@ -14,6 +14,6 @@
 
 
 <!-- Stack array for including inline css or head elements -->
-{{-- @stack('head') --}}
+@stack('head')
 
 

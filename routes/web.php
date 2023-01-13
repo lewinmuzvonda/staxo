@@ -21,3 +21,4 @@ Route::get('/', [ShopController::class, 'index'])->name('home');
 
 //Admin Routes
 Route::get('/admin', [AdminController::class, 'index'])->name('admin');
+Route::view('/admin/add-product', 'admin/add-product');;
