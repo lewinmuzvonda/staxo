@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3bbf9fe015dab62e48e0fb4e8da36311",
+    "content-hash": "c42f85d0c0d2efb7a939afbb728d0e7d",
     "packages": [
         {
             "name": "brick/math",
@@ -942,6 +942,65 @@
             "time": "2022-10-26T14:07:24+00:00"
         },
         {
+            "name": "laravel-views/laravel-views",
+            "version": "v2.4.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Gustavinho/laravel-views.git",
+                "reference": "05cca77ccfe289797a859c2de68eacd565fdcc2e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Gustavinho/laravel-views/zipball/05cca77ccfe289797a859c2de68eacd565fdcc2e",
+                "reference": "05cca77ccfe289797a859c2de68eacd565fdcc2e",
+                "shasum": ""
+            },
+            "require": {
+                "livewire/livewire": "2.*"
+            },
+            "require-dev": {
+                "laravel/legacy-factories": "^1.1",
+                "nunomaduro/larastan": "^0.7.6",
+                "orchestra/testbench": "^7.0",
+                "phpunit/phpunit": "9.5.*"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "LaravelViews\\LaravelViewsServiceProvider"
+                    ],
+                    "aliases": {
+                        "LaravelViews": "LaravelViews\\Facades\\LaravelViews",
+                        "Variants": "LaravelViews\\Facades\\Variants",
+                        "UI": "LaravelViews\\Facades\\UI"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "LaravelViews\\": "src",
+                    "LaravelViews\\Test\\": "tests"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Gustavo Martinez",
+                    "email": "gustavinho.martinez@gmail.com"
+                }
+            ],
+            "description": "Laravel package to create beautiful common views like tables using only PHP code",
+            "support": {
+                "issues": "https://github.com/Gustavinho/laravel-views/issues",
+                "source": "https://github.com/Gustavinho/laravel-views/tree/v2.4.1"
+            },
+            "time": "2023-01-02T23:18:22+00:00"
+        },
+        {
             "name": "laravel/framework",
             "version": "v9.47.0",
             "source": {
@@ -1716,6 +1775,79 @@
                 }
             ],
             "time": "2022-04-17T13:12:02+00:00"
+        },
+        {
+            "name": "livewire/livewire",
+            "version": "v2.10.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/livewire/livewire.git",
+                "reference": "4cc5dedaab1e9512efb4d528fde67df98e9b465a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/livewire/livewire/zipball/4cc5dedaab1e9512efb4d528fde67df98e9b465a",
+                "reference": "4cc5dedaab1e9512efb4d528fde67df98e9b465a",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": "^7.0|^8.0|^9.0",
+                "illuminate/support": "^7.0|^8.0|^9.0",
+                "illuminate/validation": "^7.0|^8.0|^9.0",
+                "league/mime-type-detection": "^1.9",
+                "php": "^7.2.5|^8.0",
+                "symfony/http-kernel": "^5.0|^6.0"
+            },
+            "require-dev": {
+                "calebporzio/sushi": "^2.1",
+                "laravel/framework": "^7.0|^8.0|^9.0",
+                "mockery/mockery": "^1.3.1",
+                "orchestra/testbench": "^5.0|^6.0|^7.0",
+                "orchestra/testbench-dusk": "^5.2|^6.0|^7.0",
+                "phpunit/phpunit": "^8.4|^9.0",
+                "psy/psysh": "@stable"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Livewire\\LivewireServiceProvider"
+                    ],
+                    "aliases": {
+                        "Livewire": "Livewire\\Livewire"
+                    }
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/helpers.php"
+                ],
+                "psr-4": {
+                    "Livewire\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Caleb Porzio",
+                    "email": "calebporzio@gmail.com"
+                }
+            ],
+            "description": "A front-end framework for Laravel.",
+            "support": {
+                "issues": "https://github.com/livewire/livewire/issues",
+                "source": "https://github.com/livewire/livewire/tree/v2.10.8"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/livewire",
+                    "type": "github"
+                }
+            ],
+            "time": "2022-12-21T22:28:25+00:00"
         },
         {
             "name": "monolog/monolog",
