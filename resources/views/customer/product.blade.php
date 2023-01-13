@@ -6,7 +6,7 @@
         
       
         <div class="card-body text-center">
-            <img class="card-img-top" src={{$image}}>
+            <a href="/product/{{$id}}"><img class="card-img-top" src={{$image}}></a>
             <p class="card-text pb-2">
             <strong class="card-title" style="color: black">{{$price}}AED</strong>
             </p>
