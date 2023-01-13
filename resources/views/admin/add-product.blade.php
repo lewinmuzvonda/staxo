@@ -40,14 +40,16 @@
 
                 <div class="form-group pb-4">
                     <label for="image" class="pb-2">Product Image</label>
-                    <input type="file" id="image" class="form-control" accept=".jpg,.jpeg,.png">
+                    <input type="file" id="image" max-size="500" class="form-control" accept=".jpg,.jpeg,.png">
                 </div>
 
                 <input type="text" name="image_data" id="image_data" hidden>
 
                 <div class="form-group pb-4">
-                    <button type="submit" class="btn btn-primary">Save Product</button>
+                    <button type="submit" id="file-submit" class="btn btn-primary" disabled>Save Product</button>
                 </div>
+
+                <p id="file-result"></p>
 
               </form>
         </div>
@@ -57,8 +59,27 @@
     @push('script')
     <script>
         const fileInput = document.getElementById("image");
+        let fileResult = document.getElementById("file-result");
+        let fileSubmit = document.getElementById("file-submit");
 
         fileInput.addEventListener("change", e => {
+
+            if (fileInput.files.length > 0) {
+
+                const fileSize = fileInput.files.item(0).size;
+                const fileMb = fileSize / 1024 ** 2;
+
+                if (fileMb >= 0.6) {
+
+                fileResult.innerHTML = "Please select a file less than 600KB";
+                fileSubmit.disabled = true;
+
+                } else if( fileMb < 0.6 ) {
+
+                fileSubmit.disabled = false;
+                }
+            }
+
             const file = fileInput.files[0];
             const reader = new FileReader();
 

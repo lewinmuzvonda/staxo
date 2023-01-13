@@ -30,7 +30,7 @@
                                 <img height="100px" width="100px" src="{{$product['image']}}" />
                             </td>
                             <td>{{$product['name']}}</td>
-                            <td>{{$product['price']}}</td>
+                            <td>{{$product['price']}} AED</td>
                             <td>Active</td>
                             <td><button type="button" class="btn btn-primary">Edit Product</button></td>
                         </tr>
