@@ -12,11 +12,12 @@
     <div class="container p-5">
         <div class="row pb-5">
             <div class="col">
-                <button type="button" class="btn btn-primary">View Products</button>
+                <a href="{{ route('admin') }}" class="btn btn-primary">View Products</a>
+                <a href="{{ route('categories') }}" class="btn btn-primary">Manage Categories</a>
             </div>
         </div>
         <div class="row">
-            <form>
+            <form action="{{ route('saveproduct') }}" method="POST">
                 @CSRF
                 <div class="form-group pb-4">
                   <label for="product_name" class="pb-2">Product Name</label>
@@ -26,20 +27,23 @@
                 <div class="form-group pb-4">
                   <label for="category" class="pb-2">Category</label>
                   <select class="form-control" id="category" name="category">
-                    <option>Laptops</option>
-                    <option>Smartphones</option>
+                    @foreach($categories as $category)
+                        <option value="{{$category['id']}}">{{$category['name']}}</option>
+                    @endforeach
                   </select>
                 </div>
 
                 <div class="form-group pb-4">
-                    <label for="product_name" class="pb-2">Price (AED)</label>
+                    <label for="price" class="pb-2">Price (AED)</label>
                     <input type="number" class="form-control" id="price" name="price">
                 </div>
 
                 <div class="form-group pb-4">
                     <label for="image" class="pb-2">Product Image</label>
-                    <input type="file" name="image" id="image" class="form-control" accept=".jpg,.jpeg,.png">
+                    <input type="file" id="image" class="form-control" accept=".jpg,.jpeg,.png">
                 </div>
+
+                <input type="text" name="image_data" id="image_data" hidden>
 
                 <div class="form-group pb-4">
                     <button type="submit" class="btn btn-primary">Save Product</button>
@@ -51,6 +55,23 @@
 
     <!-- push additional js -->
     @push('script')
+    <script>
+        const fileInput = document.getElementById("image");
+
+        fileInput.addEventListener("change", e => {
+            const file = fileInput.files[0];
+            const reader = new FileReader();
+
+            reader.addEventListener("load", () => {
+                // Base64 Data URL
+                console.log(reader.result);
+                document.getElementById("image_data").value = reader.result;
+            });
+
+            reader.readAsDataURL(file);
+        });
+        
+    </script>
 
     @endpush
 @endsection

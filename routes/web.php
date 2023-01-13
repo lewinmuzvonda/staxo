@@ -21,4 +21,9 @@ Route::get('/', [ShopController::class, 'index'])->name('home');
 
 //Admin Routes
 Route::get('/admin', [AdminController::class, 'index'])->name('admin');
-Route::view('/admin/add-product', 'admin/add-product');;
+Route::get('/admin/add-product', [AdminController::class, 'productForm'])->name('productform');
+Route::post('/admin/add-product', [AdminController::class, 'saveProduct'])->name('saveproduct');
+
+Route::view('/admin/add-category', '/admin/add-category')->name('categoryform');
+Route::post('/admin/add-category', [AdminController::class, 'saveCategory'])->name('savecategory');
+Route::get('/admin/categories', [AdminController::class, 'categories'])->name('categories');

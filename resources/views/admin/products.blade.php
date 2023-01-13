@@ -8,7 +8,8 @@
     <div class="container p-5">
         <div class="row pb-5">
             <div class="col">
-                <button type="button" class="btn btn-primary">Add Product</button>
+                <a href="{{ route('productform') }}" class="btn btn-primary">Create Product</a>
+                <a href="{{ route('categories') }}" class="btn btn-primary">Manage Categories</a>
             </div>
         </div>
         <div class="row">
@@ -23,15 +24,17 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>
-                        <img height="100px" width="100px" src="" />
-                    </td>
-                    <td>Phone</td>
-                    <td>AED3000</td>
-                    <td>Active</td>
-                    <td><button type="button" class="btn btn-primary">Edit Product</button></td>
-                </tr>
+                    @foreach($products as $product)
+                        <tr>
+                            <td>
+                                <img height="100px" width="100px" src="{{$product['image']}}" />
+                            </td>
+                            <td>{{$product['name']}}</td>
+                            <td>{{$product['price']}}</td>
+                            <td>Active</td>
+                            <td><button type="button" class="btn btn-primary">Edit Product</button></td>
+                        </tr>
+                    @endforeach
                 
                 </tbody>
             </table>
