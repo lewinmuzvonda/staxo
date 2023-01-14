@@ -19,8 +19,8 @@
             </div>
         </div>
         <div class="row">
-            <form action="{{ route('saveproduct') }}" method="POST">
-                @CSRF
+            <form action="{{ route('saveproduct') }}" method="POST" enctype='multipart/form-data'>
+                {{ csrf_field() }}
                 <div class="form-group pb-4">
                   <label for="product_name" class="pb-2">Product Name</label>
                   <input type="text" class="form-control" id="product_name" name="product_name">
