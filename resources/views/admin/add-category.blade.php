@@ -10,10 +10,11 @@
         </style>
     @endpush
     <div class="container p-5">
-        <div class="row pb-5">
+        <div class="row pb-5 d-flex align-items-left justify-content-between">
             <div class="col">
                 <a href="{{ route('categories') }}" class="btn btn-primary">View Categories</a>
             </div>
+
         </div>
         <div class="row">
             <form action="{{ route('savecategory') }}" method="POST">

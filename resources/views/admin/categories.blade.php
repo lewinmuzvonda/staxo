@@ -6,13 +6,12 @@
 
     @endpush
     <div class="container p-5">
-        <div class="row pb-5">
+        <div class="row pb-5 d-flex align-items-left justify-content-between">
             <div class="col">
-                <a href="{{ route('categoryform') }}" class="btn btn-primary">Create Category</a>
-                <a href="{{ route('admin') }}" class="btn btn-primary">Manage Products</a>
+                <a style="width:auto" href="{{ route('categoryform') }}" class="btn btn-primary">Create Category</a>
             </div>
             <div class="col">
-                
+                <a href="{{ route('admin') }}" class="btn btn-primary">Manage Products</a>
             </div>
         </div>
         <div class="row">

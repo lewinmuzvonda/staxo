@@ -10,9 +10,11 @@
         </style>
     @endpush
     <div class="container p-5">
-        <div class="row pb-5">
+        <div class="row pb-5 d-flex align-items-left justify-content-between">
             <div class="col">
-                <a href="{{ route('admin') }}" class="btn btn-primary">View Products</a>
+                <a href="{{ route('admin') }}" class="btn btn-primary">View <br>Products</a>
+            </div>
+            <div class="col">
                 <a href="{{ route('categories') }}" class="btn btn-primary">Manage Categories</a>
             </div>
         </div>
