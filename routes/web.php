@@ -18,6 +18,8 @@ use App\Http\Controllers\Auth\AuthController;
 
 //Customer Routes
 Route::get('/', [ShopController::class, 'index'])->name('home');
+Route::get('/product/{id}', [ShopController::class, 'product'])->name('product');
+
 
 //Admin Routes
 Route::get('/admin', [AdminController::class, 'index'])->name('admin');

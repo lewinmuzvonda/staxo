@@ -1,15 +1,18 @@
 <!doctype html>
 <head>
-	<title>@yield('title','') | STAXO</title>
+	
 	<!-- initiate head with meta tags, css and script -->
 	@include('layouts.head')
+	<title>@yield('title','') | STAXO</title>
 
 </head>
 <body id="staxo" >
     <div class="wrapper">
     	<!-- initiate header-->
-    	{{-- @include('include.header') --}}
-    	<div class="page-wrap">
+		<div class="container pb-5">
+    		@include('layouts.header')
+		</div>
+    	<div class="mt-5 page-wrap">
 
 	    	<div class="main-content">
 	    		<!-- yeild contents here -->

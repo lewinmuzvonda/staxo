@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use Illuminate\Database\Eloquent\Builder;
 use LaravelViews\Views\GridView;
 use App\Models\Product;
+use LaravelViews\Facades\UI;
 
 class ShopGridView extends GridView
 {
@@ -15,6 +16,7 @@ class ShopGridView extends GridView
     public $maxCols = 4;
     public $withBackground = true;
     public $searchBy = ['name', 'price'];
+    protected $paginate = 8;
 
     /**
      * Sets a initial query with the data to fill the table
@@ -39,7 +41,8 @@ class ShopGridView extends GridView
             'image' => $model->image,
             'name' =>  $model->name,
             'price' =>  $model->price,
-            'model' => $model
+            'model' => $model,
+            'avatar' => UI::icon('check')
         ];
     }
 
