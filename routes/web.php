@@ -24,7 +24,7 @@ Route::get('/product/{id}', [ShopController::class, 'product'])->name('product')
 //Admin Routes
 Route::get('/admin', [AdminController::class, 'index'])->name('admin');
 Route::get('/admin/add-product', [AdminController::class, 'productForm'])->name('productform');
-Route::post('/admin/add-product', [AdminController::class, 'saveProduct'])->name('saveproduct');
+Route::post('/admin/save-product', [AdminController::class, 'saveProduct'])->name('saveproduct');
 
 Route::view('/admin/add-category', '/admin/add-category')->name('categoryform');
 Route::post('/admin/add-category', [AdminController::class, 'saveCategory'])->name('savecategory');
