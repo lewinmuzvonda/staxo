@@ -8,7 +8,7 @@
 <body id="staxo" class="font-sans antialiased">
 	<div class="min-h-screen bg-gray-100">
 
-		@if (Request::is('/') || Request::is('product/*'))
+		@if (Request::is('/') || Request::is('product/*') || Request::is('cart') )
 			@include('layouts.guest-nav')
 		@else
 			@include('layouts.navigation')

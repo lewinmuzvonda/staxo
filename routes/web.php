@@ -19,8 +19,13 @@ use App\Http\Controllers\Customer\ShopController;
 //Customer Routes
 Route::get('/', [ShopController::class, 'index'])->name('home');
 Route::get('/product/{id}', [ShopController::class, 'product'])->name('product');
-
 Route::get('/dashboard', [AdminController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
+
+//Cart
+Route::get('cart', [ShopController::class, 'cart'])->name('cart.list');
+Route::post('cart', [ShopController::class, 'addToCart'])->name('cart.store');
+Route::post('update-cart', [ShopController::class, 'updateCart'])->name('cart.update');
+Route::post('remove', [ShopController::class, 'removeCart'])->name('cart.remove');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

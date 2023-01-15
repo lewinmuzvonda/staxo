@@ -14,13 +14,19 @@
                         <div class="small mb-1">{{$category}}</div>
                         <h1 class="display-5 fw-bolder">{{$name}}</h1>
                         <div class="fs-5 mb-5">
-                            <span class="fw-bold text-primary">{{$price}} AED</span>
+                            <span class="fw-bold text-primary">AED {{number_format($price, 2)}}</span>
                         </div>
                         <div class="d-flex">
-                            <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />
-                            <button class="btn btn-outline-primary" type="button">
-                                <i data-feather="shopping-bag"></i>
-                            </button>
+                            <form action="{{ route('cart.store') }}" method="POST" enctype="multipart/form-data">
+                                @csrf
+                                <input type="hidden" value="{{ $id}}" name="id">
+                                <input type="hidden" value="{{ $name }}" name="name">
+                                <input type="hidden" value="{{ $price }}" name="price">
+                                <input type="hidden" value="{{ $image }}"  name="image">
+                                <input class="bg-light text-primary border-primary text-center me-3" id="quantity" name="quantity" type="num" value="1" style="max-width: 3rem"/>
+                                <button class="px-5 py-2 text-light text-sm bg-primary rounded">Add To Cart</button>
+                                </div>
+                            </form>
 
                         </div>
                     </div>
