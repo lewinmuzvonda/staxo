@@ -9,6 +9,7 @@ use App\Models\Product;
 use App\Models\Category;
 use App\Models\User;
 use App\Models\Order;
+use App\Models\Job;
 use Session;
 use Illuminate\Support\Facades\Auth;
 
@@ -26,7 +27,7 @@ class AdminController extends Controller
 
             $user = Auth::user();
             $price = $product->price *100;
-            $payment = $price/2;
+            $firstPayment = $price/2;
             $total = $product->price * $quantity;
             $shop->clearCart();
 
@@ -42,7 +43,7 @@ class AdminController extends Controller
             Session::forget('product_id');
             Session::forget('quantity');
 
-            return $user->checkoutCharge($payment, $product->name, $quantity);
+            return view('customer/pay');
             
         }
 

@@ -4,6 +4,9 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use App\Models\Order;
+use App\Models\Job;
+use App\Models\Transaction;
 
 class Kernel extends ConsoleKernel
 {
@@ -15,7 +18,44 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
+
+         $jobs = Job::all();
+
         // $schedule->command('inspire')->hourly();
+        // $schedule->call(function () {
+            
+        // })->daily();
+
+        foreach ($jobs as $job) {
+  
+            $schedule->call(function() use($job) {
+                /*  Run your task here */
+
+                $transaction = Transaction::where('id','=',$job->transaction_id)->first();
+                $secondPayment = $transaction->amount;
+
+                if($job->status == 0){
+
+                    $user = Auth::user();
+
+                    $stripeCharge = $user->charge(
+                        $secondPayment, $job->paymentMethodId
+                    );
+
+                    if($stripeCharge){
+                        Job::where('id','=', $job->id)->delete();
+                    }
+
+                }elseif($job->status == 1){
+
+                    Job::where('id','=', $job->id)->delete();
+
+                }
+
+                Log::info($job->transaction_id.' '.\Carbon\Carbon::now());
+            })->everyFiveMinutes();;
+        }
+
     }
 
     /**

@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\Job;
 use App\Models\Order;
 use App\Models\Transaction;
 use Laravel\Cashier\Checkout;
@@ -19,53 +20,6 @@ class ShopController extends Controller
     
     public function index(){
 
-        if(isset($_GET['checkout'])){
-
-            $order_id = Session::get('order_id');
-
-            if($_GET['checkout'] == "success"){
-
-                $user = Auth::user();
-                $order_id = Session::get('order_id');
-
-                $mail = new MailController;
-                $mail->confirmationEmail();
-
-                // Change to Paid
-                Order::where('id',$order_id)->update(['status'=>1]);
-                $order = Order::where('id','=',$order_id)->first();
-
-                //Record 1st payment
-                $transaction = new Transaction;
-                $transaction->order_id = $order_id;
-                $transaction->type = 1;
-                $transaction->amount = $order->total_amount / 2;
-                $transaction->status = 1;
-                $transaction->save();
-
-                Session::forget('order_id');
-
-                return redirect()->route('confirm');
-
-            }elseif($_GET['checkout'] == "cancelled"){
-
-                if($_GET['checkout'] == "cancelled"){
-
-                    $user = Auth::user();
-                    $mail = new MailController;
-                    $mail->cancelledEmail();
-
-                     // Change to Failed
-                    Order::where('id',$order_id)->update(['status'=>3]);
-                    Session::forget('order_id');
-
-                    return redirect()->route('cancelled');
-    
-                }
-            }
-
-        }
-
         return view('customer/shop');
 
     }
@@ -75,58 +29,8 @@ class ShopController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function stripe()
+    public function pay(Request $request)
     {
-        return view('stripe');
-    }
-
-    public function stripeProcess(Request $request){
-
-        $stripe = Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
-        $user = Auth::user();
-
-        $customer = Stripe\Customer::create(array(
-
-            "email" => $user->email,
-
-            "name" => $user->name,
-
-            "source" => $request->stripeToken
-
-         ));
-
-        Stripe\Charge::create ([
-
-                "amount" => 100 * 100,
-
-                "currency" => "aed",
-
-                "customer" => $customer->id,
-
-
-        ]); 
-        Session::flash('success', 'Payment successful!');
-            
-        return back();
-
-    }
-
-    public function confirm(){
-
-
-        return view('customer/confirm');
-
-    }
-
-    public function cancelled(){
-
-
-        return view('customer/cancelled');
-
-    }
-
-    public function checkout(Request $request){
-
         $product = Product::where('id','=',$request->id)->first();
 
         if(Auth::user()){
@@ -148,16 +52,125 @@ class ShopController extends Controller
 
             Session::put('order_id', $order->id);
 
-            return $user->checkoutCharge($payment, $product->name, $request->buyquantity);
+            return view('customer/pay');
 
         }
 
         Session::put('product_id', $product->id);
         Session::put('quantity', $request->buyquantity);
-        
-        return redirect()->route('login');
 
-    }    
+        return view('customer/pay');
+    }
+
+    public function payProcess(Request $request)
+    {
+        $order_id = Session::get('order_id');
+        $order = Order::where('id','=',$order_id)->first();
+        $firstPayment = $order->total_amount/2;
+        $firstPayment = 100 * $firstPayment;
+
+        $transaction = new Transaction;
+        $transaction->order_id = $order_id;
+        $transaction->type = 1;
+        $transaction->amount = $order->total_amount / 2;
+        $transaction->status = 0;
+        $transaction->save();
+
+        //2nd payment to be paid later
+        $unpaid_transaction = new Transaction;
+        $unpaid_transaction->order_id = $order_id;
+        $unpaid_transaction->type = 2;
+        $unpaid_transaction->amount = $order->total_amount / 2;
+        $unpaid_transaction->status = 0;
+        $unpaid_transaction->save();
+
+
+        $job = new Job;
+        $job->transaction_id = $unpaid_transaction->id;
+        $job->status = 0;
+        $job->paymentMethodId = $request->paymentMethodId;
+        $job->save();
+ 
+        $stripeCharge = $request->user()->charge(
+            $firstPayment, $request->paymentMethodId
+        );
+
+        if($stripeCharge->status == "succeeded"){
+            $user = Auth::user();
+
+            $mail = new MailController;
+            $mail->confirmationEmail();
+
+            // Change to Paid
+            Order::where('id',$order_id)->update(['status'=>1]);
+            Transaction::where('id',$transaction->id)->update(['status'=>1]);
+
+            $order = Order::where('id','=',$order_id)->first();
+
+            Session::forget('order_id');
+
+            return redirect()->route('confirm');
+        }else{
+            $user = Auth::user();
+            $mail = new MailController;
+            $mail->cancelledEmail();
+
+             // Change to Failed
+            Order::where('id',$order_id)->update(['status'=>3]);
+            Session::forget('order_id');
+
+            return redirect()->route('cancelled');
+        }
+
+    }
+
+    public function confirm(){
+
+
+        return view('customer/confirm');
+
+    }
+
+    public function cancelled(){
+
+
+        return view('customer/cancelled');
+
+    }
+
+    // public function checkout(Request $request){
+
+    //     $product = Product::where('id','=',$request->id)->first();
+
+    //     if(Auth::user()){
+
+    //         $user = Auth::user();
+            
+    //         $price = $product->price *100;
+    //         $total = $product->price * $request->buyquantity;
+    //         $payment = $price/2;
+
+    //         $this->clearCart();
+
+    //         $order = new Order;
+    //         $order->customer_id = $user->id;
+    //         $order->total_amount = $total;
+    //         $order->products = $product->id;
+    //         $order->status = 0;
+    //         $order->save();
+
+    //         Session::put('order_id', $order->id);
+
+    //         return $user->checkoutCharge($payment, $product->name, $request->buyquantity);
+
+    //     }
+
+    //     Session::put('product_id', $product->id);
+    //     Session::put('quantity', $request->buyquantity);
+        
+    //     return redirect()->route('login');
+
+    // }    
 
     public function product($id){
 

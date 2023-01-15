@@ -28,7 +28,7 @@
                             </form>
                             
                         </div>
-                        <form action="{{ route('checkout') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('stripepay') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <input type="hidden" value="{{ $id }}" name="id">
                             <input id="buyquantity" name="buyquantity" type="number" value="1" hidden/>

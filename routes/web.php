@@ -30,11 +30,9 @@ Route::post('update-cart', [ShopController::class, 'updateCart'])->name('cart.up
 Route::post('remove', [ShopController::class, 'removeCart'])->name('cart.remove');
 
 //STRIPE
-Route::post('checkout', [ShopController::class, 'checkout'])->name('checkout');
-
-Route::get('stripe', [ShopController::class, 'stripe']);
-Route::post('stripe', [ShopController::class, 'stripeProcess'])->name('stripe.post');
-
+// Route::post('checkout', [ShopController::class, 'checkout'])->name('checkout');
+Route::post('stripepay', [ShopController::class, 'pay'])->name('stripepay');
+Route::post('pay', [ShopController::class, 'payProcess'])->name('pay.post');
 
 Route::middleware('auth')->group(function () {
     //EMAILING
