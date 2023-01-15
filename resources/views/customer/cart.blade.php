@@ -41,7 +41,7 @@
                                     </a>
                                     </td>
                                     
-                                    <td class="justify-center mt-6 md:justify-end md:flex">
+                                    <td class="align-items-center justify-center mt-6 md:justify-end md:flex">
                                     <div class="h-10 w-28">
                                         <div class="relative flex flex-row w-full h-8">
                                         
@@ -72,7 +72,7 @@
                                 
                                 </tbody>
                             </table>
-                            <div style="background-color: black" class="display-block border rounded-3 p-3 text-light text-right align-items-right fw-bold">
+                            <div style="background-color: black" class="mt-5 display-block border rounded-3 p-3 text-light text-right align-items-right fw-bold">
                                 TOTAL: AED {{ number_format(Cart::getTotal(), 2) }}
                             </div>
                             <div class="align-items-right text-right pt-4">
