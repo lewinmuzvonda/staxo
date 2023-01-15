@@ -1,7 +1,7 @@
 <form id="pay" action="{{ route('pay.post') }}" method="post">
     @csrf
     <input name="name" id="card-holder-name" type="text">
-    <input name="paymentMethodId" id="paymentMethodId" value="" type="text">
+    <input name="paymentMethodId" id="paymentMethodId" value="" type="text" hidden>
     
     <!-- Stripe Elements Placeholder -->
     <div id="card-element"></div>
