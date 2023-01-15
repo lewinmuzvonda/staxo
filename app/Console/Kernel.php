@@ -23,46 +23,43 @@ class Kernel extends ConsoleKernel
 
          $jobs = Job::all();
 
-        // $schedule->command('inspire')->hourly();
-        // $schedule->call(function () {
-            
-        // })->daily();
+        $schedule->call(function () {
+            foreach ($jobs as $job) {
+    
+                $schedule->call(function() use($job) {
+                    /*  Run your task here */
 
-        foreach ($jobs as $job) {
-  
-            $schedule->call(function() use($job) {
-                /*  Run your task here */
+                    $transaction = Transaction::where('id','=',$job->transaction_id)->first();
+                    $order = Order::where('id','=',$transaction->order_id)->first();
+                    $client = User::where('id','=',$order->customer_id)->first();
 
-                $transaction = Transaction::where('id','=',$job->transaction_id)->first();
-                $order = Order::where('id','=',$transaction->order_id)->first();
-                $client = User::where('id','=',$order->customer_id)->first();
+                    $secondPayment = $transaction->amount;
 
-                $secondPayment = $transaction->amount;
+                    if($job->status == 0){
 
-                if($job->status == 0){
+                        $stripeCharge = $client->charge(
+                            $secondPayment, $job->paymentMethodId
+                        );
 
-                    $stripeCharge = $client->charge(
-                        $secondPayment, $job->paymentMethodId
-                    );
+                        if($stripeCharge){
 
-                    if($stripeCharge){
+                            $mail = new MailController;
+                            $mail->settlementEmail($client);
+                            
+                            Job::where('id','=', $job->id)->delete();
 
-                        $mail = new MailController;
-                        $mail->settlementEmail($client);
-                        
+                        }
+
+                    }elseif($job->status == 1){
+
                         Job::where('id','=', $job->id)->delete();
 
                     }
 
-                }elseif($job->status == 1){
-
-                    Job::where('id','=', $job->id)->delete();
-
-                }
-
-                Log::info($job->transaction_id.' '.\Carbon\Carbon::now());
-            })->everyFiveMinutes();;
-        }
+                    Log::info($job->transaction_id.' '.\Carbon\Carbon::now());
+                })->everyFiveMinutes();
+            }
+        })->everyMinute();
 
     }
 
