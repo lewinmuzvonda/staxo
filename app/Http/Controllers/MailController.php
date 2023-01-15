@@ -24,6 +24,20 @@ class MailController extends Controller
         });
     }
 
+    public function settlementEmail($client) {
+
+        $data = array('client_name'=>$client->name);
+        $client_email = $client->email;
+        $client_name = $client->name;
+        
+        Mail::send('customer/email/settlement', $data, function($message) use ($client_email, $client_name) {
+
+           $message->to($client_email, $client_name)->subject('Order Settlement');
+           $message->from('info@lewindev.com','STAXOLEWIN');
+
+        });
+    }
+
     public function cancelledEmail() {
 
         $user = Auth::user();

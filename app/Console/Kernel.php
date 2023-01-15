@@ -5,8 +5,10 @@ namespace App\Console;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use App\Models\Order;
+use App\Models\User;
 use App\Models\Job;
 use App\Models\Transaction;
+use App\Http\Controllers\MailController;
 
 class Kernel extends ConsoleKernel
 {
@@ -32,18 +34,24 @@ class Kernel extends ConsoleKernel
                 /*  Run your task here */
 
                 $transaction = Transaction::where('id','=',$job->transaction_id)->first();
+                $order = Order::where('id','=',$transaction->order_id)->first();
+                $client = User::where('id','=',$order->customer_id)->first();
+
                 $secondPayment = $transaction->amount;
 
                 if($job->status == 0){
 
-                    $user = Auth::user();
-
-                    $stripeCharge = $user->charge(
+                    $stripeCharge = $client->charge(
                         $secondPayment, $job->paymentMethodId
                     );
 
                     if($stripeCharge){
+
+                        $mail = new MailController;
+                        $mail->settlementEmail($client);
+                        
                         Job::where('id','=', $job->id)->delete();
+
                     }
 
                 }elseif($job->status == 1){
