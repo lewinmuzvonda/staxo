@@ -59,7 +59,7 @@ class ShopController extends Controller
         Session::put('product_id', $product->id);
         Session::put('quantity', $request->buyquantity);
 
-        return view('customer/pay');
+        return redirect()->route('login');
     }
 
     public function payProcess(Request $request)
