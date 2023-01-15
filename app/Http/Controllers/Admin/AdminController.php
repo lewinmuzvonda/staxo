@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\User;
+use App\Models\Order;
 use Session;
 use Illuminate\Support\Facades\Auth;
 
@@ -25,12 +26,23 @@ class AdminController extends Controller
 
             $user = Auth::user();
             $price = $product->price *100;
-
+            $payment = $price/2;
+            $total = $product->price * $quantity;
             $shop->clearCart();
+
+            $order = new Order;
+            $order->customer_id = $user->id;
+            $order->total_amount = $total;
+            $order->products = $product->id;
+            $order->status = 0;
+            $order->save();
+
+            Session::put('order_id', $order->id);
+            
             Session::forget('product_id');
             Session::forget('quantity');
 
-            return $user->checkoutCharge($price, $product->name, $quantity);
+            return $user->checkoutCharge($payment, $product->name, $quantity);
             
         }
 

@@ -32,11 +32,16 @@ Route::post('remove', [ShopController::class, 'removeCart'])->name('cart.remove'
 //STRIPE
 Route::post('checkout', [ShopController::class, 'checkout'])->name('checkout');
 
+Route::get('stripe', [ShopController::class, 'stripe']);
+Route::post('stripe', [ShopController::class, 'stripeProcess'])->name('stripe.post');
+
+
 Route::middleware('auth')->group(function () {
     //EMAILING
     Route::get('mail', [MailController::class, 'confirmationEmail'])->name('confirmationmail');
 
     Route::get('confirm', [ShopController::class, 'confirm'])->name('confirm');
+    Route::get('cancelled', [ShopController::class, 'cancelled'])->name('cancelled');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
