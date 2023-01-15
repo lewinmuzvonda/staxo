@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Customer\ShopController;
+use App\Http\Controllers\MailController;
 use Illuminate\Http\Request;
 
 /*
@@ -30,9 +31,12 @@ Route::post('remove', [ShopController::class, 'removeCart'])->name('cart.remove'
 
 //STRIPE
 Route::post('checkout', [ShopController::class, 'checkout'])->name('checkout');
-Route::get('confirm', [ShopController::class, 'confirm'])->name('confirm');
 
 Route::middleware('auth')->group(function () {
+    //EMAILING
+    Route::get('mail', [MailController::class, 'confirmationEmail'])->name('confirmationmail');
+
+    Route::get('confirm', [ShopController::class, 'confirm'])->name('confirm');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');

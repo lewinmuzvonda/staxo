@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Customer;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\MailController;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
@@ -16,6 +17,24 @@ class ShopController extends Controller
     public function index(){
 
         if(isset($_GET['checkout'])){
+
+            if($_GET['checkout'] == "success"){
+
+                $user = Auth::user();
+                $mail = new MailController;
+                $mail->confirmationEmail();
+
+            }elseif($_GET['checkout'] == "cancelled"){
+
+                if($_GET['checkout'] == "cancelled"){
+
+                    $user = Auth::user();
+                    $mail = new MailController;
+                    $mail->cancelledEmail();
+    
+                }
+            }
+
             return redirect()->route('confirm');
         }
 
