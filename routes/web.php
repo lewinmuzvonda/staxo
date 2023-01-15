@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Customer\ShopController;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +28,10 @@ Route::post('cart', [ShopController::class, 'addToCart'])->name('cart.store');
 Route::post('update-cart', [ShopController::class, 'updateCart'])->name('cart.update');
 Route::post('remove', [ShopController::class, 'removeCart'])->name('cart.remove');
 
+//STRIPE
+Route::post('checkout', [ShopController::class, 'checkout'])->name('checkout');
+Route::get('confirm', [ShopController::class, 'confirm'])->name('confirm');
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -40,6 +45,7 @@ Route::middleware('auth')->group(function () {
     Route::view('/admin/add-category', '/admin/add-category')->name('categoryform');
     Route::post('/admin/add-category', [AdminController::class, 'saveCategory'])->name('savecategory');
     Route::get('/admin/categories', [AdminController::class, 'categories'])->name('categories');
+
 });
 
 require __DIR__.'/auth.php';

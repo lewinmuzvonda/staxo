@@ -23,12 +23,18 @@
                                 <input type="hidden" value="{{ $name }}" name="name">
                                 <input type="hidden" value="{{ $price }}" name="price">
                                 <input type="hidden" value="{{ $image }}"  name="image">
-                                <input class="bg-light text-primary border-primary text-center me-3" id="quantity" name="quantity" type="num" value="1" style="max-width: 3rem"/>
-                                <button class="px-5 py-2 text-light text-sm bg-primary rounded">Add To Cart</button>
-                                </div>
+                                <input class="fw-bold border rounded text-light text-center me-3 bg-dark" id="quantity" name="quantity" type="number" value="1"/><br>
+                                <button class="mt-2 px-5 py-2 text-light text-sm bg-primary rounded">Add To Cart</button>
                             </form>
-
+                            
                         </div>
+                        <form action="{{ route('checkout') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <input type="hidden" value="{{ $id }}" name="id">
+                            <input id="buyquantity" name="buyquantity" type="number" value="1" hidden/>
+                            <button class="mt-2 px-5 py-2 text-light text-sm bg-dark rounded">Buy Now</button>
+                        </form>
+                        
                     </div>
                 </div>
             </div>
@@ -70,6 +76,17 @@
 
     <!-- push additional js -->
     @push('script')
+
+    <script>
+
+        let quantity = document.getElementById("quantity");
+        quantity.addEventListener("change", e => {
+
+            document.getElementById("buyquantity").value = quantity.value;
+
+        });
+
+    </script>
 
     @endpush
 @endsection

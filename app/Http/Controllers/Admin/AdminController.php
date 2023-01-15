@@ -3,14 +3,36 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Customer\ShopController;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\User;
+use Session;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
     public function index(){
+
+        $product_id = Session::get('product_id');
+        $quantity = Session::get('quantity');
+
+        if($product_id > 0 && $quantity > 0){
+
+            $shop = new ShopController;
+            $product = Product::where('id','=',$product_id)->first();
+
+            $user = Auth::user();
+            $price = $product->price *100;
+
+            $shop->clearCart();
+            Session::forget('product_id');
+            Session::forget('quantity');
+
+            return $user->checkoutCharge($price, $product->name, $quantity);
+            
+        }
 
         $products = Product::leftJoin('categories','categories.id','=','products.category')
         ->select('products.name','products.image','products.price','products.status as product_status','categories.name as category_name')
