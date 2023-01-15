@@ -1,31 +1,33 @@
 <!doctype html>
 <head>
 	
-	<!-- initiate head with meta tags, css and script -->
 	@include('layouts.head')
 	<title>@yield('title','') | STAXO</title>
 
 </head>
-<body id="staxo" >
-    <div class="wrapper">
-    	<!-- initiate header-->
-		<div class="container pb-5">
-    		@include('layouts.header')
+<body id="staxo" class="font-sans antialiased">
+	<div class="min-h-screen bg-gray-100">
+
+		@if (Request::is('/') || Request::is('product/*'))
+			@include('layouts.guest-nav')
+		@else
+			@include('layouts.navigation')
+		@endif
+
+		<div class="wrapper">
+
+			<div class="mt-1 page-wrap">
+
+				<div class="main-content">
+					@yield('content')
+				</div>
+
+				@include('layouts.footer')
+
+			</div>
 		</div>
-    	<div class="mt-5 page-wrap">
 
-	    	<div class="main-content">
-	    		<!-- yeild contents here -->
-	    		@yield('content')
-	    	</div>
-
-	    	<!-- initiate footer section-->
-	    	@include('layouts.footer')
-
-    	</div>
-    </div>
-
-	<!-- initiate scripts-->
-	@include('layouts.script')	
+		@include('layouts.script')
+	</div>	
 </body>
 </html>
