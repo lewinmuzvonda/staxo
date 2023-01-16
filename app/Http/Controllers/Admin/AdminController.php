@@ -48,7 +48,7 @@ class AdminController extends Controller
         }
 
         $products = Product::leftJoin('categories','categories.id','=','products.category')
-        ->select('products.name','products.image','products.price','products.status as product_status','categories.name as category_name')
+        ->select('products.id','products.name','products.image','products.price','products.status as product_status','categories.name as category_name')
         ->get();
 
         return view('admin/products',[
@@ -64,6 +64,37 @@ class AdminController extends Controller
         return view('admin/add-product',[
             'categories' => $categories,
         ]);
+
+    }
+
+    public function editProductForm($id){
+        
+        $categories = Category::get();
+        $productData = Product::where('id','=',$id)->first();
+
+        return view('admin/edit-product',[
+            'categories' => $categories,
+            'product' => $productData,
+        ]);
+
+    }
+
+    public function editProduct(Request $request){
+
+        Product::where('id',$request->id)->update([
+            'name'=>$request->product_name,
+            'price'=>$request->price,
+            'category'=>$request->category,
+        ]);
+
+        if(isset($request->image_data)){
+            Product::where('id',$request->id)->update([
+                'image'=>$request->image_data,
+            ]);
+        }
+
+        return redirect()->intended('/admin');
+
 
     }
 

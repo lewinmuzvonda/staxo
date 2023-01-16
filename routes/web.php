@@ -22,6 +22,8 @@ use Illuminate\Http\Request;
 Route::get('/', [ShopController::class, 'index'])->name('home');
 Route::get('/product/{id}', [ShopController::class, 'product'])->name('product');
 Route::get('/dashboard', [AdminController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/edit-product/{id}', [AdminController::class, 'editProduct'])->name('editproduct');
+
 
 //Cart
 // Route::get('cart', [ShopController::class, 'cart'])->name('cart.list');
@@ -49,6 +51,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin');
     Route::get('/admin/add-product', [AdminController::class, 'productForm'])->name('productform');
     Route::post('/admin/save-product', [AdminController::class, 'saveProduct'])->name('saveproduct');
+    Route::get('/edit-product/{id}', [AdminController::class, 'editProductForm'])->name('editproductform');
+    Route::post('/update-product', [AdminController::class, 'editProduct'])->name('editproduct');
 
     Route::view('/admin/add-category', '/admin/add-category')->name('categoryform');
     Route::post('/admin/add-category', [AdminController::class, 'saveCategory'])->name('savecategory');
