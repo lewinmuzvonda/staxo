@@ -24,14 +24,15 @@ Route::get('/product/{id}', [ShopController::class, 'product'])->name('product')
 Route::get('/dashboard', [AdminController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
 //Cart
-Route::get('cart', [ShopController::class, 'cart'])->name('cart.list');
-Route::post('cart', [ShopController::class, 'addToCart'])->name('cart.store');
-Route::post('update-cart', [ShopController::class, 'updateCart'])->name('cart.update');
-Route::post('remove', [ShopController::class, 'removeCart'])->name('cart.remove');
+// Route::get('cart', [ShopController::class, 'cart'])->name('cart.list');
+// Route::post('cart', [ShopController::class, 'addToCart'])->name('cart.store');
+// Route::post('update-cart', [ShopController::class, 'updateCart'])->name('cart.update');
+// Route::post('remove', [ShopController::class, 'removeCart'])->name('cart.remove');
 
 //STRIPE
 // Route::post('checkout', [ShopController::class, 'checkout'])->name('checkout');
 Route::post('stripepay', [ShopController::class, 'pay'])->name('stripepay');
+// Route::post('cartpay', [ShopController::class, 'cartpay'])->name('cartpay');
 Route::post('pay', [ShopController::class, 'payProcess'])->name('pay.post');
 
 Route::middleware('auth')->group(function () {

@@ -17,15 +17,16 @@
                             <span class="fw-bold text-primary">AED {{number_format($price, 2)}}</span>
                         </div>
                         <div class="d-flex">
-                            <form action="{{ route('cart.store') }}" method="POST" enctype="multipart/form-data">
+                            {{-- <form action="{{ route('cart.store') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <input type="hidden" value="{{ $id}}" name="id">
                                 <input type="hidden" value="{{ $name }}" name="name">
                                 <input type="hidden" value="{{ $price }}" name="price">
                                 <input type="hidden" value="{{ $image }}"  name="image">
-                                <input class="fw-bold border rounded text-light text-center me-3 bg-dark" id="quantity" name="quantity" type="number" value="1"/><br>
                                 <button class="mt-2 px-5 py-2 text-light text-sm bg-primary rounded">Add To Cart</button>
-                            </form>
+                            </form> --}}
+                            
+                            <input class="fw-bold border rounded text-light text-center me-3 bg-dark" id="quantity" name="quantity" type="number" value="1"/>
                             
                         </div>
                         <form action="{{ route('stripepay') }}" method="POST" enctype="multipart/form-data">

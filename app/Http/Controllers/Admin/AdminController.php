@@ -29,7 +29,7 @@ class AdminController extends Controller
             $price = $product->price *100;
             $firstPayment = $price/2;
             $total = $product->price * $quantity;
-            $shop->clearCart();
+            // $shop->clearCart();
 
             $order = new Order;
             $order->customer_id = $user->id;
