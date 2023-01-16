@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\Job;
 use App\Models\Transaction;
 use App\Http\Controllers\MailController;
+use Illuminate\Support\Facades\Log;
 
 class Kernel extends ConsoleKernel
 {
