@@ -84,16 +84,22 @@ class ShopController extends Controller
         $unpaid_transaction->status = 0;
         $unpaid_transaction->save();
 
+        $user = Auth::user();
 
         $job = new Job;
         $job->transaction_id = $unpaid_transaction->id;
         $job->status = 0;
         $job->paymentMethodId = $request->paymentMethodId;
-        $job->save();
- 
+        $job->save();  
+        
+        $user->addPaymentMethod($request->paymentMethodId);
+
         $stripeCharge = $request->user()->charge(
             $firstPayment, $request->paymentMethodId
         );
+
+        // dd($user->paymentMethods());
+        // $user->findPaymentMethod($request->paymentMethodId);
 
         if($stripeCharge->status == "succeeded"){
             $user = Auth::user();

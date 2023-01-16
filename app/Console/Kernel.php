@@ -40,14 +40,14 @@ class Kernel extends ConsoleKernel
                         $secondPayment, $job->paymentMethodId
                     );
 
-                    // if($stripeCharge){
+                    if($stripeCharge){
 
                         $mail = new MailController;
                         $mail->settlementEmail($client);
                         
                         Job::where('id','=', $job->id)->delete();
 
-                    // }
+                    }
 
                 }elseif($job->status == 1){
 
