@@ -17,7 +17,5 @@
             <a href="/product/{{$id}}"><button class="btn btn-primary">BUY NOW</button></a>
         </div>
            
-
-
     </div>
   
