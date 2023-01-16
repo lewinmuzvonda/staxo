@@ -73,8 +73,6 @@
         </section>
         @endif
         
-
-    <!-- push additional js -->
     @push('script')
 
     <script>
