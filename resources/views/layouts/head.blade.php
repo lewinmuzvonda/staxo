@@ -3,7 +3,7 @@
 <meta name="title" content="STAXO | LEWIN">
 <meta name="description" content="Staxo Web by Lewin">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="csrf_token" value="{{ csrf_token() }}"/>
+<meta name="csrf-token" value="{{ csrf_token() }}"/>
 
 
 <link rel="stylesheet" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap">

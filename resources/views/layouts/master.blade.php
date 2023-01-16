@@ -8,7 +8,9 @@
 <body id="staxo" class="font-sans antialiased">
 	<div class="min-h-screen bg-gray-100">
 
-		@if (Request::is('/') || Request::is('product/*') || Request::is('confirm') || Request::is('stripepay') || Request::is('login') || Request::is('register'))
+		@if (Request::is('/') || Request::is('product/*') || Request::is('confirm') || Request::is('stripepay') 
+		|| Request::is('login') || Request::is('register') || Request::is('reset-password') || Request::is('verify-email')
+		|| Request::is('forgot-password') || Request::is('confirm-password'))
 			@include('layouts.guest-nav')
 		@else
 			@include('layouts.navigation')
