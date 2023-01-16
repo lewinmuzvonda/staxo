@@ -32,7 +32,7 @@ class Kernel extends ConsoleKernel
                 $order = Order::where('id','=',$transaction->order_id)->first();
                 $client = User::where('id','=',$order->customer_id)->first();
 
-                $secondPayment = (int) $transaction->amount;
+                $secondPayment = (int) $transaction->amount * 100;
 
                 if($job->status == 0){
 
@@ -56,7 +56,7 @@ class Kernel extends ConsoleKernel
                 }
 
                 Log::info($job->transaction_id.' '.\Carbon\Carbon::now());
-            })->everyMinute();;
+            })->everyFiveMinutes();;
         }
 
     }
