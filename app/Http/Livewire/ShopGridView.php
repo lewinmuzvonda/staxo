@@ -15,7 +15,8 @@ class ShopGridView extends GridView
     // protected $model = Product::class;
     public $maxCols = 4;
     public $withBackground = true;
-    // public $searchBy = ['name', 'price'];
+    public $searchBy = ['name', 'price'];
+    protected $paginate = 8;
 
     /**
      * Sets a initial query with the data to fill the table
@@ -44,11 +45,11 @@ class ShopGridView extends GridView
         ];
     }
 
-    // public function sortableBy()
-    // {
-    //     return [
-    //         'Name' =>'name',
-    //         'Price' => 'price'
-    //     ];
-    // }
+    public function sortableBy()
+    {
+        return [
+            'Name' =>'name',
+            'Price' => 'price'
+        ];
+    }
 }
