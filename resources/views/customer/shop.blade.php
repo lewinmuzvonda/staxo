@@ -2,7 +2,7 @@
 @section('title', 'Home')
 @push('head')
 <meta name="csrf-token" content="{{ csrf_token() }}" />
-<script src="{{ asset('js/app.js') }}" defer></script>
+<script defer src="https://unpkg.com/alpinejs@3.10.5/dist/cdn.min.js"></script>
 @endpush
 
 @section('content')
