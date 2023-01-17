@@ -111,7 +111,7 @@
                       <td bgcolor="#0d6efd" align="center">
                           <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;">
                               <tr>
-                                  <td align="center" valign="top" style="padding: 40px 10px 40px 10px;"> STAXO | LEWIN</td>
+                                  <td align="center" valign="top" style="padding: 40px 10px 40px 10px;color: white"> STAXO | LEWIN</td>
                               </tr>
                           </table>
                       </td>
