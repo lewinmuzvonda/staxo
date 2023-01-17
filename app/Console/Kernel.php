@@ -41,7 +41,10 @@ class Kernel extends ConsoleKernel
                         $secondPayment, $job->paymentMethodId
                     );
 
-                    if($stripeCharge){
+                    if($stripeCharge->status == "succeeded"){
+
+                        Order::where('id',$order->id)->update(['status'=>2]);
+                        Transaction::where('id',$transaction->id)->update(['status'=>1]);
 
                         $mail = new MailController;
                         $mail->settlementEmail($client);

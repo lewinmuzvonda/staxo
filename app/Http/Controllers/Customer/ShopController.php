@@ -87,14 +87,11 @@ class ShopController extends Controller
         $job->paymentMethodId = $request->paymentMethodId;
         $job->save();  
         
+        //STRIPE REQUIREMENT FOR MULTIPLE PAYMENTS
         $user->addPaymentMethod($request->paymentMethodId);
-
         $stripeCharge = $request->user()->charge(
             $firstPayment, $request->paymentMethodId
         );
-
-        // dd($user->paymentMethods());
-        // $user->findPaymentMethod($request->paymentMethodId);
 
         if($stripeCharge->status == "succeeded"){
             $user = Auth::user();
