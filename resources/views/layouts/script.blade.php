@@ -1,5 +1,5 @@
 <script> 
 
 </script>
-@laravelViewsScripts(livewire)
+@laravelViewsScripts(laravel-views,livewire)
 @stack('script')
