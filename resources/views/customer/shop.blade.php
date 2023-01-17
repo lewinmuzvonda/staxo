@@ -2,6 +2,7 @@
 @section('title', 'Home')
 @push('head')
 <meta name="csrf-token" content="{{ csrf_token() }}" />
+<script src="{{ asset('js/app.js') }}" defer></script>
 @endpush
 
 @section('content')

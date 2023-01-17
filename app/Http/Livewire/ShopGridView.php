@@ -14,7 +14,7 @@ class ShopGridView extends GridView
     // protected $model = Product::class;
     public $maxCols = 4;
     // public $withBackground = true;
-    // public $searchBy = ['name', 'price'];
+    public $searchBy = ['name', 'price'];
     // protected $paginate = 8;
 
     protected $model = Product::class;
