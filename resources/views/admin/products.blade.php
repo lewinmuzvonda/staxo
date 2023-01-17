@@ -13,8 +13,8 @@
                 <thead>
                 <tr>
                     <th scope="col">Image</th>
-                    <th scope="col">Product Name</th>
-                    <th scope="col">Product Category</th>
+                    <th scope="col">Product</th>
+                    <th scope="col">Category</th>
                     <th scope="col">Price</th>
                     <th scope="col">Status</th>
                     <th scope="col">Action</th>
