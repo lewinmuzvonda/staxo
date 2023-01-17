@@ -115,6 +115,14 @@ class AdminController extends Controller
 
     }
 
+    public function deleteProduct($id){
+
+        Product::where('id','=',$id)->delete();
+
+        return back();
+
+    }
+
     public function saveCategory(Request $request){
 
         $category = new Category;

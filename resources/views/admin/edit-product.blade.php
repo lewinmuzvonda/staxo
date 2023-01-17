@@ -56,6 +56,7 @@
 
                 <div class="form-group pb-4">
                     <button type="submit" id="file-submit" class="btn btn-primary">Update Product</button>
+                    <a id="cancel" class="btn btn-danger" href="{{ route('admin') }}">Cancel</a>
                 </div>
 
                 <p id="file-result"></p>

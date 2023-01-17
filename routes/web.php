@@ -53,6 +53,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/admin/save-product', [AdminController::class, 'saveProduct'])->name('saveproduct');
     Route::get('/edit-product/{id}', [AdminController::class, 'editProductForm'])->name('editproductform');
     Route::post('/update-product', [AdminController::class, 'editProduct'])->name('editproduct');
+    Route::get('/delete-product/{id}', [AdminController::class, 'deleteProduct'])->name('deleteproduct');
 
     Route::view('/admin/add-category', '/admin/add-category')->name('categoryform');
     Route::post('/admin/add-category', [AdminController::class, 'saveCategory'])->name('savecategory');

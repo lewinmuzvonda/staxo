@@ -30,7 +30,15 @@
                             <td>{{$product['category_name']}}</td>
                             <td>{{$product['price']}} AED</td>
                             <td>Active</td>
-                            <td><a href="{{ route('editproductform', $product['id']) }}"><button type="button" class="btn btn-primary">Edit</button></td>
+                            <td>
+                                <a href="{{ route('editproductform', $product['id']) }}">
+                                    <button type="button" class="btn btn-primary">Edit</button>
+                                </a>
+
+                                <a href="{{ route('deleteproduct', $product['id']) }}">
+                                    <button id="deleteproduct" type="button" class="btn btn-danger">Delete</button>
+                                </a>
+                            </td>
                         </tr>
                     @endforeach
                 
@@ -39,8 +47,4 @@
         </div>
     </div>
 
-    <!-- push additional js -->
-    @push('script')
-
-    @endpush
 @endsection
