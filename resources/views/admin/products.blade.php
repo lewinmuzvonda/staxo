@@ -8,8 +8,8 @@
                 <a href="{{ route('productform') }}" class="btn btn-primary">Add Product</a>
             </div>
         </div>
-        <div class="row">
-            <table class="table">
+        <div class="container table-responsive py-5">
+            <table class="table table-bordered table-hover">
                 <thead>
                 <tr>
                     <th scope="col">Image</th>
