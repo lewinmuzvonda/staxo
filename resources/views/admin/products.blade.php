@@ -1,10 +1,7 @@
 @extends('layouts.master') 
 @section('title', 'Manage Products')
 @section('content')
-    <!-- push additional head elements to head -->
-    @push('head')
 
-    @endpush
     <div class="container p-5">
         <div class="row pb-5 d-flex align-items-left justify-content-between">
             <div class="col">

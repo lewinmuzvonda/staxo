@@ -3,9 +3,9 @@
 <meta name="title" content="STAXO | LEWIN">
 <meta name="description" content="Staxo Web by Lewin">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="csrf-token" value="{{ csrf_token() }}"/>
+<meta name="csrf_token" id="token" value="{{ csrf_token() }}"/>
 
-
+<script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap">
 @vite(['resources/css/app.css', 'resources/js/app.js'])
 <link rel="icon" href="{{ asset('favicon.png')}}" />

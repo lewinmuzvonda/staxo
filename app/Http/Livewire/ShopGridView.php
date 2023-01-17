@@ -5,7 +5,6 @@ namespace App\Http\Livewire;
 use Illuminate\Database\Eloquent\Builder;
 use LaravelViews\Views\GridView;
 use App\Models\Product;
-use LaravelViews\Facades\UI;
 
 class ShopGridView extends GridView
 {
@@ -18,16 +17,7 @@ class ShopGridView extends GridView
     public $searchBy = ['name', 'price'];
     protected $paginate = 8;
 
-    /**
-     * Sets a initial query with the data to fill the table
-     *
-     * @return Builder Eloquent query
-     */
-    public function repository(): Builder
-    {
-        return Product::select('products.id','products.name','products.image','products.price','products.status as product_status');
-    }
-
+    protected $model = Product::class;
     public $cardComponent = 'customer.product';
     /**
      * Sets the data to every card on the view

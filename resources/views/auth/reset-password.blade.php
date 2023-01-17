@@ -1,6 +1,7 @@
 @extends('layouts.master') 
 @section('title', 'Login')
 @section('content')
+
 <x-guest-layout>
     <form method="POST" action="{{ route('password.store') }}">
         @csrf
