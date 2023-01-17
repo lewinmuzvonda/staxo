@@ -30,7 +30,7 @@
                             <td>{{$product['category_name']}}</td>
                             <td>{{$product['price']}} AED</td>
                             <td>Active</td>
-                            <td><a href="{{ route('editproductform', $product['id']) }}"><button type="button" class="btn btn-primary">Edit Product</button></td>
+                            <td><a href="{{ route('editproductform', $product['id']) }}"><button type="button" class="btn btn-primary">Edit</button></td>
                         </tr>
                     @endforeach
                 
