@@ -24,12 +24,12 @@
                 <div class="form-group pb-4">
                   <label for="product_name" class="pb-2">Product Name</label>
                   <input type="hidden" name="id" value="{{$product->id}}"/>
-                  <input type="text" class="form-control" id="product_name" name="product_name" value="{{$product->name}}">
+                  <input type="text" class="form-control" id="product_name" name="product_name" value="{{$product->name}}" required>
                 </div>
 
                 <div class="form-group pb-4">
                   <label for="category" class="pb-2">Category</label>
-                  <select class="form-control" id="category" name="category">
+                  <select class="form-control" id="category" name="category" required>
 
                     @foreach($categories as $category)
                         @if($category['id'] == $product->category )
@@ -44,12 +44,12 @@
 
                 <div class="form-group pb-4">
                     <label for="price" class="pb-2">Price (AED)</label>
-                    <input type="number" class="form-control" id="price" name="price" value="{{$product->price}}">
+                    <input type="number" class="form-control" id="price" name="price" value="{{$product->price}}" required>
                 </div>
 
                 <div class="form-group pb-4">
                     <label for="image" class="pb-2">Change Image</label>
-                    <input type="file" id="image" max-size="500" class="form-control" accept=".jpg,.jpeg,.png">
+                    <input type="file" id="image" max-size="500" class="form-control" accept=".jpg,.jpeg,.png" required>
                 </div>
 
                 <input type="text" name="image_data" id="image_data" hidden>

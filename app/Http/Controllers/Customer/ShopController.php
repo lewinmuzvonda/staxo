@@ -124,7 +124,6 @@ class ShopController extends Controller
 
     public function confirm(){
 
-
         return view('customer/confirm');
 
     }

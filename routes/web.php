@@ -32,17 +32,16 @@ Route::get('/edit-product/{id}', [AdminController::class, 'editProduct'])->name(
 // Route::post('remove', [ShopController::class, 'removeCart'])->name('cart.remove');
 
 //STRIPE
-// Route::post('checkout', [ShopController::class, 'checkout'])->name('checkout');
 Route::post('stripepay', [ShopController::class, 'pay'])->name('stripepay');
-// Route::post('cartpay', [ShopController::class, 'cartpay'])->name('cartpay');
 Route::post('pay', [ShopController::class, 'payProcess'])->name('pay.post');
+
 
 Route::middleware('auth')->group(function () {
     //EMAILING
     Route::get('mail', [MailController::class, 'confirmationEmail'])->name('confirmationmail');
 
-    Route::get('confirm', [ShopController::class, 'confirm'])->name('confirm');
-    Route::get('cancelled', [ShopController::class, 'cancelled'])->name('cancelled');
+    Route::get('confirm', [ShopController::class, 'confirm'])->name('confirm'); //Order confirmation page
+    Route::get('cancelled', [ShopController::class, 'cancelled'])->name('cancelled'); //Order cancellation page
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');

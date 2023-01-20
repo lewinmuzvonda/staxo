@@ -53,10 +53,6 @@ class Kernel extends ConsoleKernel
 
                     }
 
-                }elseif($job->status == 1){
-
-                    Job::where('id','=', $job->id)->delete();
-
                 }
 
                 Log::info($job->transaction_id.' '.\Carbon\Carbon::now());
