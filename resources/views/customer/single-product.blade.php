@@ -14,7 +14,7 @@
                         <div class="small mb-1">{{$category}}</div>
                         <h1 class="display-5 fw-bolder">{{$name}}</h1>
                         <div class="fs-5 mb-5">
-                            <span class="fw-bold text-primary">AED {{number_format($price, 2)}}</span>
+                            <span class="fw-bold text-primary">USD {{number_format($price, 2)}}</span>
                         </div>
                         <div class="d-flex">
                             {{-- <form action="{{ route('cart.store') }}" method="POST" enctype="multipart/form-data">
@@ -57,7 +57,7 @@
                                     <!-- Product name-->
                                     <a href="/product/{{$product['id']}}"><h5 class="fw-bolder text-primary">{{$product['name']}}</h5></a>
                                     <!-- Product price-->
-                                    <strong>{{$product['price']}} AED</strong>
+                                    <strong>{{$product['price']}} USD</strong>
                                 </div>
                             </div>
                             <!-- Product actions-->

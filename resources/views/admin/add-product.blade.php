@@ -36,7 +36,7 @@
                 </div>
 
                 <div class="form-group pb-4">
-                    <label for="price" class="pb-2">Price (AED)</label>
+                    <label for="price" class="pb-2">Price (USD)</label>
                     <input type="number" class="form-control" id="price" name="price"required>
                 </div>
 
