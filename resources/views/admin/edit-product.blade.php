@@ -49,7 +49,7 @@
 
                 <div class="form-group pb-4">
                     <label for="image" class="pb-2">Change Image</label>
-                    <input type="file" id="image" max-size="500" class="form-control" accept=".jpg,.jpeg,.png" required>
+                    <input type="file" id="image" max-size="500" class="form-control" accept=".jpg,.jpeg,.png">
                 </div>
 
                 <input type="text" name="image_data" id="image_data" hidden>
