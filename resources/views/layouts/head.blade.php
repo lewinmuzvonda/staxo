@@ -1,7 +1,7 @@
 <meta charset="utf-8">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
-<meta name="title" content="STAXO | LEWIN">
-<meta name="description" content="Staxo Web by Lewin">
+<meta name="title" content="Parcel Market">
+<meta name="description" content="Parcel Market by Parcel Rush">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="csrf_token" id="token" value="{{ csrf_token() }}"/>
 

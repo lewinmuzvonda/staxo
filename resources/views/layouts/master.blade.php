@@ -2,7 +2,7 @@
 <head>
 	
 	@include('layouts.head')
-	<title>@yield('title','') | STAXO</title>
+	<title>@yield('title','') | ParcelMarket</title>
 
 </head>
 <body id="staxo" class="font-sans antialiased">
