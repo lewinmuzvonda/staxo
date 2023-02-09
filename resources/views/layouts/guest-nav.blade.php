@@ -6,7 +6,8 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('home') }}">
-                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
+                        {{-- <x-application-logo class="block h-9 w-auto fill-current text-gray-800" /> --}}
+                        Parcel Market
                     </a>
                 </div>
 
@@ -16,7 +17,7 @@
                         {{ __('Home') }}
                     </x-nav-link>
 
-                    @guest
+                    {{-- @guest
                     <x-nav-link :href="route('login')" :active="request()->routeIs('login')">
                         {{ __('Login') }}
                     </x-nav-link>
@@ -26,7 +27,7 @@
                         <x-nav-link :href="route('admin')" :active="request()->routeIs('admin')">
                             {{ __('Admin Portal') }}
                         </x-nav-link>
-                    @endauth
+                    @endauth --}}
 
 
                     {{-- <a href="{{ route('cart.list') }}" class="flex items-center">
@@ -103,7 +104,7 @@
         <div class="pt-4 pb-1 border-t border-gray-200">
 
             <div class="mt-3 space-y-1">
-                
+{{--                 
                     @guest
                         <x-responsive-nav-link :href="route('login')">
                         Login
@@ -114,7 +115,7 @@
                         <x-responsive-nav-link :href="route('admin')">
                         Admin Portal
                         </x-responsive-nav-link>
-                    @endauth
+                    @endauth --}}
                
 
             </div>
