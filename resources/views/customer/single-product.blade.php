@@ -33,7 +33,7 @@
                             @csrf
                             <input type="hidden" value="{{ $id }}" name="id">
                             <input id="buyquantity" name="buyquantity" type="number" value="1" hidden/>
-                            <button class="btn btn-primary mt-2 px-5 py-2 text-light text-sm rounded">Buy Now</button>
+                            {{-- <button class="btn btn-primary mt-2 px-5 py-2 text-light text-sm rounded">Buy Now</button> --}}
                         </form>
                         
                     </div>
