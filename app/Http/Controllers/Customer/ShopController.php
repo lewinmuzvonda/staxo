@@ -36,7 +36,7 @@ class ShopController extends Controller
             $total = $product->price * $request->buyquantity;
             $payment = $price/2;
 
-            // $this->clearCart();
+            $this->clearCart();
 
             $order = new Order;
             $order->customer_id = $user->id;
@@ -160,134 +160,139 @@ class ShopController extends Controller
 
     }
 
-        //     /**
-    //  * success response method.
-    //  *
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function cartpay(Request $request)
-    // {
-    //     $product = Product::where('id','=',$request->id)->first();
+            /**
+     * success response method.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function cartpay(Request $request)
+    {
+        $product = Product::where('id','=',$request->id)->first();
 
-    //     if(Auth::user()){
+        if(Auth::user()){
 
-    //         $user = Auth::user();
+            $user = Auth::user();
             
-    //         $price = $product->price *100;
-    //         $total = $request->total;
-    //         dd($total);
-    //         $payment = $total/2;
+            $price = $product->price *100;
+            $total = $request->total;
+            dd($total);
+            $payment = $total/2;
 
-    //         $this->clearCart();
+            $this->clearCart();
 
-    //         $order = new Order;
-    //         $order->customer_id = $user->id;
-    //         $order->total_amount = $total;
-    //         $order->products = $product->id;
-    //         $order->status = 0;
-    //         $order->save();
+            $order = new Order;
+            $order->customer_id = $user->id;
+            $order->total_amount = $total;
+            $order->products = $product->id;
+            $order->status = 0;
+            $order->save();
 
-    //         Session::put('order_id', $order->id);
+            Session::put('order_id', $order->id);
 
-    //         return view('customer/pay');
+            return view('customer/pay');
 
-    //     }
+        }
 
-    //     Session::put('product_id', $product->id);
-    //     Session::put('quantity', $request->buyquantity);
+        Session::put('product_id', $product->id);
+        Session::put('quantity', $request->buyquantity);
 
-    //     return redirect()->route('login');
-    // }
+        return redirect()->route('login');
+    }
 
 
-        // public function checkout(Request $request){
+        public function checkout(Request $request){
 
-    //     $product = Product::where('id','=',$request->id)->first();
+        $product = Product::where('id','=',$request->id)->first();
 
-    //     if(Auth::user()){
+        if(Auth::user()){
 
-    //         $user = Auth::user();
+            $user = Auth::user();
             
-    //         $price = $product->price *100;
-    //         $total = $product->price * $request->buyquantity;
-    //         $payment = $price/2;
+            $price = $product->price *100;
+            $total = $product->price * $request->buyquantity;
+            $payment = $price/2;
 
-    //         $this->clearCart();
+            $this->clearCart();
 
-    //         $order = new Order;
-    //         $order->customer_id = $user->id;
-    //         $order->total_amount = $total;
-    //         $order->products = $product->id;
-    //         $order->status = 0;
-    //         $order->save();
+            $order = new Order;
+            $order->customer_id = $user->id;
+            $order->total_amount = $total;
+            $order->products = $product->id;
+            $order->status = 0;
+            $order->save();
 
-    //         Session::put('order_id', $order->id);
+            Session::put('order_id', $order->id);
 
-    //         return $user->checkoutCharge($payment, $product->name, $request->buyquantity);
+            return $user->checkoutCharge($payment, $product->name, $request->buyquantity);
 
-    //     }
+        }
 
-    //     Session::put('product_id', $product->id);
-    //     Session::put('quantity', $request->buyquantity);
+        Session::put('product_id', $product->id);
+        Session::put('quantity', $request->buyquantity);
         
-    //     return redirect()->route('login');
+        return redirect()->route('login');
 
-    // }   
+    }   
 
-    // public function cart()
-    // {
-    //     $list = \Cart::getContent();
-    //     return view('customer/cart', compact('list'));
-    // }
+    public function cart()
+    {
 
-    // public function addToCart(Request $request)
-    // {
-    //     \Cart::add([
-    //         'id' => $request->id,
-    //         'name' => $request->name,
-    //         'price' => $request->price,
-    //         'quantity' => $request->quantity,
-    //         'attributes' => array(
-    //             'image' => $request->image,
-    //         )
-    //     ]);
-    //     session()->flash('success', $request->name.'added to Cart.');
+        if(Auth::user()){
+            $list = \Cart::getContent();
+            return view('customer/cart', compact('list'));
+        }else{
+            return redirect()->route('login');
+        }
+    }
 
-    //     return redirect()->route('home');
-    // }
+    public function addToCart(Request $request)
+    {
+        \Cart::add([
+            'id' => $request->id,
+            'name' => $request->name,
+            'price' => $request->price,
+            'quantity' => $request->quantity,
+            'attributes' => array(
+                'image' => $request->image,
+            )
+        ]);
+        session()->flash('success', $request->name.'added to Cart.');
 
-    // public function updateCart(Request $request)
-    // {
-    //     \Cart::update(
-    //         $request->id,
-    //         [
-    //             'quantity' => [
-    //                 'relative' => false,
-    //                 'value' => $request->quantity
-    //             ],
-    //         ]
-    //     );
+        return redirect()->route('home');
+    }
 
-    //     session()->flash('success', 'Cart Updated');
+    public function updateCart(Request $request)
+    {
+        \Cart::update(
+            $request->id,
+            [
+                'quantity' => [
+                    'relative' => false,
+                    'value' => $request->quantity
+                ],
+            ]
+        );
 
-    //     return redirect()->route('cart.list');
-    // }
+        session()->flash('success', 'Cart Updated');
 
-    // public function removeCart(Request $request)
-    // {
-    //     \Cart::remove($request->id);
-    //     session()->flash('success', 'Item Removed');
+        return redirect()->route('cart.list');
+    }
 
-    //     return redirect()->route('cart.list');
-    // }
+    public function removeCart(Request $request)
+    {
+        \Cart::remove($request->id);
+        session()->flash('success', 'Item Removed');
 
-    // public function clearCart()
-    // {
-    //     \Cart::clear();
+        return redirect()->route('cart.list');
+    }
 
-    //     session()->flash('success', 'Cart Cleared');
+    public function clearCart()
+    {
+        \Cart::clear();
 
-    //     return redirect()->route('cart.list');
-    // }
+        session()->flash('success', 'Cart Cleared');
+
+        return redirect()->route('cart.list');
+    }
 
 }

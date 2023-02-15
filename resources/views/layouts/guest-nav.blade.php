@@ -17,23 +17,23 @@
                         {{ __('Home') }}
                     </x-nav-link>
 
-                    {{-- @guest
+                    @guest
                     <x-nav-link :href="route('login')" :active="request()->routeIs('login')">
                         {{ __('Login') }}
                     </x-nav-link>
                     @endguest
 
-                    @auth
+                    {{-- @auth
                         <x-nav-link :href="route('admin')" :active="request()->routeIs('admin')">
                             {{ __('Admin Portal') }}
                         </x-nav-link>
                     @endauth --}}
 
 
-                    {{-- <a href="{{ route('cart.list') }}" class="flex items-center">
+                    <a href="{{ route('cart.list') }}" class="flex items-center">
                         <i class="text-primary" data-feather="shopping-bag"></i>
                        <span class="border rounded px-2 bg-dark text-light">{{ Cart::getTotalQuantity()}}</span> 
-                    </a> --}}
+                    </a>
                 </div>
                
             </div>
@@ -44,7 +44,6 @@
                     @auth
                         <x-dropdown align="right" width="48">
                             <x-slot name="trigger">
-                        
                                     <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
                                         <div>{{ Auth::user()->name }}</div>
 
@@ -54,13 +53,12 @@
                                             </svg>
                                         </div>
                                     </button>
-                                
                             </x-slot>
 
                             <x-slot name="content">
-                                <x-dropdown-link :href="route('profile.edit')">
+                                {{-- <x-dropdown-link :href="route('profile.edit')">
                                     {{ __('Profile') }}
-                                </x-dropdown-link>
+                                </x-dropdown-link> --}}
 
                                 <!-- Authentication -->
                                 <form method="POST" action="{{ route('logout') }}">
@@ -74,7 +72,6 @@
                                 </form>
                             </x-slot>
                         </x-dropdown>
-                    
                     @endauth
 
             </div>
@@ -104,14 +101,14 @@
         <div class="pt-4 pb-1 border-t border-gray-200">
 
             <div class="mt-3 space-y-1">
-{{--                 
+                
                     @guest
                         <x-responsive-nav-link :href="route('login')">
                         Login
                         </x-responsive-nav-link>
                     @endguest
 
-                    @auth
+                    {{-- @auth
                         <x-responsive-nav-link :href="route('admin')">
                         Admin Portal
                         </x-responsive-nav-link>

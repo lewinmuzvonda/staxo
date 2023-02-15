@@ -1,4 +1,4 @@
-{{-- @extends('layouts.master') 
+@extends('layouts.master') 
 @section('title', 'Cart')
 @section('content')
 
@@ -76,7 +76,7 @@
                                 TOTAL: AED {{ number_format(Cart::getTotal(), 2) }}
                             </div>
                             <div class="align-items-right text-right pt-4">
-                                <form action="{{ route('cartpay') }}" method="POST" enctype="multipart/form-data">
+                                <form action="{{ route('cart.pay') }}" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     <input id="id" name="id" type="hidden" value="{{ $item->id}}"/>
                                     <input id="total" name="total" type="number" value="{{ number_format(Cart::getTotal(), 2) }}"/>
@@ -95,4 +95,4 @@
     @push('script')
 
     @endpush
-@endsection --}}
+@endsection

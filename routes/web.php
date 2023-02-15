@@ -26,10 +26,11 @@ Route::get('/edit-product/{id}', [AdminController::class, 'editProduct'])->name(
 
 
 //Cart
-// Route::get('cart', [ShopController::class, 'cart'])->name('cart.list');
-// Route::post('cart', [ShopController::class, 'addToCart'])->name('cart.store');
-// Route::post('update-cart', [ShopController::class, 'updateCart'])->name('cart.update');
-// Route::post('remove', [ShopController::class, 'removeCart'])->name('cart.remove');
+Route::get('cart', [ShopController::class, 'cart'])->name('cart.list');
+Route::post('cart', [ShopController::class, 'addToCart'])->name('cart.store');
+Route::post('update-cart', [ShopController::class, 'updateCart'])->name('cart.update');
+Route::post('remove', [ShopController::class, 'removeCart'])->name('cart.remove');
+Route::post('cartpay', [ShopController::class, 'cartpay'])->name('cart.pay');
 
 //STRIPE
 Route::post('stripepay', [ShopController::class, 'pay'])->name('stripepay');
